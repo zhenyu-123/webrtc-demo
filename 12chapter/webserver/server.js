@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Autor: sy
+ * @Date: 2022-07-08 08:28:12
+ * @LastEditors: sy
+ * @LastEditTime: 2024-06-25 15:21:09
+ */
 'use strict'
 
 var log4js = require('log4js');
@@ -52,7 +59,7 @@ var https_server = https.createServer(options, app);
 var io = socketIo.listen(https_server);
 
 io.sockets.on('connection', (socket)=> {
-
+	console.log('a user connected');
 	socket.on('message', (room, data)=>{
 		socket.to(room).emit('message',room, data);
 	});
@@ -91,7 +98,7 @@ io.sockets.on('connection', (socket)=> {
 
 });
 
-https_server.listen(443, '0.0.0.0');
+https_server.listen(444, '0.0.0.0');
 
 
 

@@ -40,7 +40,7 @@ app.use(express.static('./public'));
 
 //http server
 var http_server = http.createServer(app);
-http_server.listen(80, '0.0.0.0');
+http_server.listen(8089, 'localhost');
 
 var options = {
 	key : fs.readFileSync('./cert/1557605_www.learningrtc.cn.key'),
@@ -48,7 +48,7 @@ var options = {
 }
 
 //https server
-var https_server = https.createServer(options, app);
+var https_server = https.createServer({}, app);
 
 //bind socket.io with https_server
 var io = socketIo.listen(https_server);
@@ -56,7 +56,7 @@ var sockio = socketIo.listen(http_server);
 
 //connection
 io.sockets.on('connection', (socket)=>{
-
+	console.log('连接成功1');
 	socket.on('message', (room, data)=>{
 		socket.to(room).emit('message', room, data)//房间内所有人,除自己外
 	});
@@ -107,6 +107,7 @@ io.sockets.on('connection', (socket)=>{
 
 //connection
 sockio.sockets.on('connection', (socket)=>{
+	console.log('连接成功2');
 
 	socket.on('message', (room, data)=>{
 		sockio.in(room).emit('message', room, socket.id, data)//房间内所有人
@@ -138,7 +139,7 @@ sockio.sockets.on('connection', (socket)=>{
 	});
 });
 
-https_server.listen(40000, '0.0.0.0');
+// https_server.listen(8089, 'localhost');
 
 
 

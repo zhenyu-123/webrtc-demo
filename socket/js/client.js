@@ -15,7 +15,7 @@ var room;
 btnConnect.onclick = ()=>{
 
 	//connect
-	socket = io.connect('http://localhost:8089');
+	socket = io.connect('http://localhost:3000');
 	console.log('connect',socket);
 	//recieve message
 	socket.on('joined', (room, id) => {

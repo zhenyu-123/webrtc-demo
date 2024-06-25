@@ -9,15 +9,19 @@
 'use strict';
 
 const videoElement = document.querySelector('video');
+// 声音输入
 const audioInputSelect = document.querySelector('select#audioSource');
+// 声音输出
 const audioOutputSelect = document.querySelector('select#audioOutput');
+// 摄像头
 const videoSelect = document.querySelector('select#videoSource');
 const selectors = [audioInputSelect, audioOutputSelect, videoSelect];
 
 audioOutputSelect.disabled = !('sinkId' in HTMLMediaElement.prototype);
 
 function gotDevices(deviceInfos) {
-  // Handles being called several times to update labels. Preserve values.
+  console.log(deviceInfos,"deviceInfos");
+  // 多次调用以更新标签的句柄。保留值。
   const values = selectors.map(select => select.value);
   selectors.forEach(select => {
     while (select.firstChild) {
